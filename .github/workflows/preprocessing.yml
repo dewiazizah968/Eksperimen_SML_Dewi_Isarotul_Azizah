@@ -25,9 +25,8 @@ jobs:
 
       - name: Run automated preprocessing
         run: |
-          cd preprocessing
-          cp ../Telco-Customer-Churn.csv .
-          python automate_Dewi_Isarotul_Azizah.py
+          cp Telco-Customer-Churn.csv preprocessing/
+          python "preprocessing/automate_Dewi Isarotul Azizah.py"
 
       - name: Upload preprocessed dataset
         uses: actions/upload-artifact@v4
