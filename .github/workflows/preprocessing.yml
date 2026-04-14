@@ -1,0 +1,36 @@
+name: CI - Automated Preprocessing
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  preprocessing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.7"
+
+      - name: Install dependencies
+        run: |
+          pip install pandas scikit-learn
+
+      - name: Run automated preprocessing
+        run: |
+          cd preprocessing
+          cp ../Telco-Customer-Churn.csv .
+          python automate_Dewi_Isarotul_Azizah.py
+
+      - name: Upload preprocessed dataset
+        uses: actions/upload-artifact@v4
+        with:
+          name: telco_churn_preprocessing
+          path: preprocessing/telco_churn_preprocessing.csv
